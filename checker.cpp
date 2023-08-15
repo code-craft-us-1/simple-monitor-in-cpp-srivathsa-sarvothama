@@ -1,22 +1,46 @@
-#include <assert.h>
 #include <iostream>
+#include <assert.h>
+#include <unistd.h>
 using namespace std;
 
-bool batteryIsOk(float temperature, float soc, float chargeRate) {
-  if(temperature < 0 || temperature > 45) {
-    cout << "Temperature out of range!\n";
-    return false;
-  } else if(soc < 20 || soc > 80) {
-    cout << "State of Charge out of range!\n";
-    return false;
-  } else if(chargeRate > 0.8) {
-    cout << "Charge Rate out of range!\n";
-    return false;
+int vitalsOk(float temperature, float pulseRate, float spo2) {
+  if(temperature > 102 || temperature < 95) {
+    cout << "Temperature critical!\n";
+    for (int i = 0; i < 6; i++)
+    {
+      cout << "\r* " << flush;
+      sleep(1);
+      cout << "\r *" << flush;
+      sleep(1);
+    }
+
+    return 0;
+  } else if(pulseRate < 60 || pulseRate > 100) {
+    cout << "Pulse Rate is out of range!\n";
+    for (int i = 0; i < 6; i++)
+    {
+      cout << "\r* " << flush;
+      sleep(1);
+      cout << "\r *" << flush;
+      sleep(1);
+    }
+    return 0;
+  } else if(spo2 < 90) {
+    cout << "Oxygen Saturation out of range!\n";
+    for (int i = 0; i < 6; i++)
+    {
+      cout << "\r* " << flush;
+      sleep(1);
+      cout << "\r *" << flush;
+      sleep(1);
+    }
+    return 0;
   }
-  return true;
+  return 1;
 }
 
 int main() {
-  assert(batteryIsOk(25, 70, 0.7) == true);
-  assert(batteryIsOk(50, 85, 0) == false);
+  assert(!vitalsOk(99, 102, 70));
+  assert(vitalsOk(98.1, 70, 98));
+  cout << "Done\n";
 }
