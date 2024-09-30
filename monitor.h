@@ -1,8 +1,7 @@
 #pragma once
 #include <vector>
 
-enum Vital
-{
+enum Vital {
     Temperature,
     PulseRate,
     SPO2

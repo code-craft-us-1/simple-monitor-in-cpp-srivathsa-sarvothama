@@ -7,7 +7,7 @@
 using std::cout, std::flush, std::this_thread::sleep_for, std::chrono::seconds;
 
 VitalRange vitalRanges[] = {
-    {Temperature,95.0f, 102.0f, "Temperature is critical!\n"},
+    {Temperature, 95.0f, 102.0f, "Temperature is critical!\n"},
     {PulseRate, 60.0f, 100.0f, "Pulse Rate is out of range!\n"},
     {SPO2, 90.0f, std::numeric_limits<float>::max(), "Oxygen Saturation out of range!\n"}
 };
